@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://www.youtube.com/player_api"></script>
 
+    <script>
+        // ID youtube of 50 videos or any more ...
+        var list_videos = [
+            "BDpjfYj69_4",
+            "OLPjoqELr7g",
+            "2r4n-m4Sppc",
+			"KVgBw2dPZ1U",
+			"fB_hBSJUBXs",
+			"6tIKoPGlZgs",
+			"NA0M3OSEgeI",
+			"O6KS7A1qOLk",
+			"pzBlr_nSB0Q"
+        ];
+
+        console.log('list_videos', list_videos);
+
+        var idInList = Math.floor(Math.random() * list_videos.length);
+        var videoWillShow = list_videos[idInList]; 
+        // create youtube player
+        var player;
+        function onYouTubePlayerAPIReady() {
+            player = new YT.Player('player', {
+              height: '850',
+              width: '700',
+              videoId: videoWillShow,
+              events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+              }
+            });
+        }
+
+        // autoplay video
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        // when video ends
+        function onPlayerStateChange(event) {        
+            if(event.data === 0) {            
+                document.getElementById("player").hidden = true;
+            }
+        }
+        
+    </script>
+
+</head>
+<body>
+    <div id="player" />
+</body>
+</html>
